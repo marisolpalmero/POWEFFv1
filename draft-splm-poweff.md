@@ -379,9 +379,13 @@ FIXME
 
 RFC Editor Note: This section is to be removed during the final publication of the document.
 
-* From version -02 to -03
+* From version draft-opsawg-poweff-02 to draft-splm-poweff-00
 
+  - Renamed draft
   - Updated one author affiliation
+  - Moved WG to GREEN
+  - Moved YANG modules to yang/ directory
+  - Switched to building using MartinThompsons RFC build env.
 
 * From version -01 to -02
 
