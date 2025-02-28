@@ -7,10 +7,10 @@ category: std
 consensus: true
 submissiontype: IETF
 area: operations
-workgroup: OPSA Working Group
+workgroup: GREEN Working Group
 
-docname: draft-opsawg-poweff-01
-#obsoletes: 4711, 4712 # Remove if not needed/Replace
+docname: draft-splm-poweff-latest
+obsoletes: I-D.draft-opsawg-poweff
 #updates: 4710 # Remove if not needed/Replace
 
 lang: en
@@ -23,7 +23,7 @@ pi:
   - symrefs
 
 normative:
-  I-D.draft-lindblad-tlm-philatelist-01:
+  I-D.draft-lindblad-tlm-philatelist-03:
 
 informative:
   I-D.draft-palmero-ivy-ps-almo-01:
@@ -32,12 +32,12 @@ informative:
 author:
 -   ins: J. Lindblad
     name: Jan Lindblad
-    organization: Cisco Systems
-    email: jlindbla@cisco.com
+    organization: All For Eco
+    email: jan.lindblad+ietf@for.eco
 -   ins: S. Mitrovic
     name: Snezana Mitrovic
     organization: Cisco Systems
-    email: snmitrov@cisco.com   
+    email: snmitrov@cisco.com
 -   ins: M. Palmero
     name: Marisol Palmero
     organization: Cisco Systems
@@ -47,17 +47,17 @@ author:
     organization: Cisco Systems
     email: gsalguei@cisco.com
 
---- abstract 
+--- abstract
 
 This document specifies a device YANG "dashboard" data model that allows devices to report which power measurement and control functions they offer.  This basic YANG model is applicable to any kind of device, regardless of whether the device itself has any support for YANG-based management interfaces or not.  The YANG model simply allows a device to describe what it can report, and which interfaces are available to request this data.  Devices that lack any on-board YANG-based management interfaces provide this information in form of a YANG instance data file.  This file may be readable from an on-board web server on the device, or hosted anywhere else.
 
 --- middle
 
-# Introduction 
+# Introduction
 
 As highlighted during the [IAB workshop on environmental impacts](https://datatracker.ietf.org/doc/html/draft-iab-ws-environmental-impacts-report-00), visibility is a very important first step. Paraphrasing Peter Drucker's mantra of "You cannot improve what you don't measure".  During the workshop the need for standardized metrics was established, to avoid proprietary, redundant and even contradictory metrics across vendors.
 
-POWEFF is considered a first step, part of the Sustainability Telemetry Specification referred as part of the Sustainability Insights {{?I-D.draft-almprs-sustainability-insights-02}} IETF draft (a newer version may exist).  That is where the overall problem statement, solution principles and other components of the proposed solution can be found.  Specifically, this work is meant to fit in with the {{I-D.draft-lindblad-tlm-philatelist-01}} framework.
+POWEFF is considered a first step, part of the Sustainability Telemetry Specification referred as part of the Sustainability Insights {{?I-D.draft-almprs-sustainability-insights-02}} IETF draft (a newer version may exist).  That is where the overall problem statement, solution principles and other components of the proposed solution can be found.  Specifically, this work is meant to fit in with the {{I-D.draft-lindblad-tlm-philatelist-03}} framework.
 
 This Power Consumption and Energy Efficiency Telemetry Specification (POWEFF) provides a way for a controller to understand what a device offers in terms of power related sensors and controls.  It also provides machine readable metadata for the sensors, such as which units of measurement are used, what is included in the reported data, the precision of the data, etc.  This is referred to as the device dashboard.
 
@@ -90,7 +90,7 @@ CO2eq
 : Carbon dioxide equivalents, a measure of the disruptive force of greenhouse gas emissions.
 
 Power
-: Refers to the (e.g. electrical or optical) energy per unit of time, supplied to operate an asset, such as a smartphone. It is usually measured in units of Watts. 
+: Refers to the (e.g. electrical or optical) energy per unit of time, supplied to operate an asset, such as a smartphone. It is usually measured in units of Watts.
 
 Energy Efficiency
 : refers to the ability of an asset to perform its intended functions while minimizing energy consumption. It refers to the ratio between the useful output energy and input energy given by an asset. In a router or a switch, it is a measure of how efficiently the network element utilizes energy resources to transmit and process data or perform other network-related tasks. See [Energy efficiency wikipedia](https://en.wikipedia.org/wiki/Energy_efficiency).
@@ -124,8 +124,8 @@ Implementing any Sustainability Solution at scale for customers with a broad ran
 
 ## Use Cases
 
-- Monitoring power and energy efficiency based on common metrics. 
-- Enhance reporting and provide a comprehensive overview for potentially improving power usage during the operational phase. 
+- Monitoring power and energy efficiency based on common metrics.
+- Enhance reporting and provide a comprehensive overview for potentially improving power usage during the operational phase.
 - Consumption per device, e.g. wireless environment.
 - Capabilities to optimize energy consumption when assets are not in use, e.g. idle and allocated power.
 - Hardware Lifecycle. Circular economy enables to restore product value at the end of life, there are several options, reuse, remanufacturing, recycling, repurpose, etc.
@@ -144,7 +144,7 @@ For level 0, the Network Element implements the Philatelist YANG module ietf-tlm
 
 ## Level 1, Current Total Power Draw
 
-At level 1, the device implements a very small, but well defined dashboard, and lists it using the Philatelist 
+At level 1, the device implements a very small, but well defined dashboard, and lists it using the Philatelist
 ietf-tlm-philatelist-provider module. The level 1 dashboard consists of a single dashboard item. This dashboard item provides a way for the Network Controller to read the current total power draw of the Network Element.
 
 ~~~ yang-tree
@@ -242,7 +242,7 @@ module: ietf-poweff-level-3
 
 At level 4, the Network Element also provides a list of services/tenants/clients/domains/functions that it delivers value towards, and attributes the Network Element's power draw to each of the services.  The list of services may include one "overhead/idle/other/unknown" entry that absorbs any overhead not attributable to a particular service. The power draw MAY be further subdivided for each service by using a dot notation.
 
-One service instance called '-idle-' may be present in the list and absorb any overhead/idle/other/unknown kind of power draw that the system would not allocate to any service. It is up to the implementor to decide what a 'service' means for this type of system. It may be any kind of service that it delivers user value towards. 
+One service instance called '-idle-' may be present in the list and absorb any overhead/idle/other/unknown kind of power draw that the system would not allocate to any service. It is up to the implementor to decide what a 'service' means for this type of system. It may be any kind of service that it delivers user value towards.
 
 For example, if a system serves three customers, X, Y and Z, their power draw could be declared as follows:
 
@@ -256,7 +256,7 @@ For example, if a system serves three customers, X, Y and Z, their power draw co
 | Y             |                 26 |                             |
 | Z             |                 19 |                             |
 | -idle-        |                 48 |                             |
-        
+
 The sum of the current-power-draw top level entries  (in this example: X, Y, Z and -idle-, with values 45 + 26 + 19 + 48 = 138) must match the value provided in ietf-poweff-level-1:device-current-total-power-draw
 
 The sub-service values (e.g. X.vpn, 39W) need to be lower than or equal to (but do not necessarily need to match) their parent level (e.g. X, 45W).
@@ -304,42 +304,42 @@ module: ietf-poweff-level-5
 
 ## Module ietf-poweff-types.yang
 ~~~~ yang
-{::include YANGModules/ietf-poweff-types.yang}
+{::include yang/ietf-poweff-types.yang}
 ~~~~
 {: sourcecode-markers="true"
 sourcecode-name="ietf-poweff-types@2024-04-16.yang”}
 
 ## Module ietf-poweff-level-1.yang
 ~~~~ yang
-{::include YANGModules/ietf-poweff-level-1.yang}
+{::include yang/ietf-poweff-level-1.yang}
 ~~~~
 {: sourcecode-markers="true"
 sourcecode-name="ietf-poweff-level-1@2024-04-16.yang”}
 
 ## Module ietf-poweff-level-2.yang
 ~~~~ yang
-{::include YANGModules/ietf-poweff-level-2.yang}
+{::include yang/ietf-poweff-level-2.yang}
 ~~~~
 {: sourcecode-markers="true"
 sourcecode-name="ietf-poweff-level-2@2024-04-16.yang”}
 
 ## Module ietf-poweff-level-3.yang
 ~~~~ yang
-{::include YANGModules/ietf-poweff-level-3.yang}
+{::include yang/ietf-poweff-level-3.yang}
 ~~~~
 {: sourcecode-markers="true"
 sourcecode-name="ietf-poweff-level-3@2024-04-16.yang”}
 
 ## Module ietf-poweff-level-4.yang
 ~~~~ yang
-{::include YANGModules/ietf-poweff-level-4.yang}
+{::include yang/ietf-poweff-level-4.yang}
 ~~~~
 {: sourcecode-markers="true"
 sourcecode-name="ietf-poweff-level-4@2024-04-16.yang”}
 
 ## Module ietf-poweff-level-5.yang
 ~~~~ yang
-{::include YANGModules/ietf-poweff-level-5.yang}
+{::include yang/ietf-poweff-level-5.yang}
 ~~~~
 {: sourcecode-markers="true"
 sourcecode-name="ietf-poweff-level-5@2024-04-16.yang”}
@@ -350,7 +350,7 @@ POWEFF data models define the data schemas for power consumption and energy effi
 
 To enable the exchange of POWEFF data among all interested parties, deployment considerations that are out of the scope of this document, will need to include:
 
-   * The data structure to describe all metrics and quantify relevant data consistently, i.e. specific formats like XML or JSON encoded message would be deemed valid or invalid based on POWEFF models. 
+   * The data structure to describe all metrics and quantify relevant data consistently, i.e. specific formats like XML or JSON encoded message would be deemed valid or invalid based on POWEFF models.
    * The process to share and collect POWEFF data across the consumers consistently, including the transport mechanism. The POWEFF YANG models can be used with network management protocols such as NETCONF {{?RFC6241}}, RESTCONF {{?RFC8040}}, streaming telemetry, etc. OpenAPI specification could be considered to consume POWEFF metrics.
    * How the configuration of assets should be done.
 
@@ -378,6 +378,10 @@ FIXME
 {:numbered="false"}
 
 RFC Editor Note: This section is to be removed during the final publication of the document.
+
+* From version -02 to -03
+
+  - Updated one author affiliation
 
 * From version -01 to -02
 
