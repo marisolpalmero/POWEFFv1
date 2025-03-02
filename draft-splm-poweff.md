@@ -10,7 +10,7 @@ area: operations
 workgroup: GREEN Working Group
 
 docname: draft-splm-poweff-latest
-obsoletes: I-D.draft-opsawg-poweff
+obsoletes: I-D.draft-opsawg-poweff-01
 #updates: 4710 # Remove if not needed/Replace
 
 lang: en
@@ -382,8 +382,8 @@ RFC Editor Note: This section is to be removed during the final publication of t
 * From version draft-opsawg-poweff-02 to draft-splm-poweff-00
 
   - Renamed draft
-  - Updated one author affiliation
   - Moved WG to GREEN
+  - Updated one author affiliation
   - Moved YANG modules to yang/ directory
   - Switched to building using MartinThompsons RFC build env.
 
